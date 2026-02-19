@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="Privacy in Machine Learning — curated readings on membership inference, gradient inversion, federated learning, and differential privacy." />
   <title>Privacy in ML — Reading List</title>
+
   <style>
     :root {
       --bg: #0b1020;
       --card: rgba(255,255,255,0.06);
       --text: rgba(255,255,255,0.92);
-      --muted: rgba(255,255,255,0.72);
+      --muted: rgba(255,255,255,0.7);
       --border: rgba(255,255,255,0.14);
       --accent: #7dd3fc;
-      --accent2:#a78bfa;
       --shadow: 0 12px 30px rgba(0,0,0,0.35);
       --radius: 16px;
-      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
     }
+
     @media (prefers-color-scheme: light) {
       :root {
         --bg: #f6f7fb;
@@ -26,385 +26,172 @@
         --text: rgba(0,0,0,0.88);
         --muted: rgba(0,0,0,0.62);
         --border: rgba(0,0,0,0.12);
-        --shadow: 0 12px 30px rgba(0,0,0,0.10);
+        --shadow: 0 12px 30px rgba(0,0,0,0.08);
       }
     }
-    html, body { height: 100%; }
+
     body {
       margin: 0;
       font-family: var(--sans);
+      background: var(--bg);
       color: var(--text);
-      background: radial-gradient(1200px 600px at 15% 10%, rgba(125, 211, 252, 0.18), transparent 55%),
-                  radial-gradient(900px 500px at 85% 25%, rgba(167, 139, 250, 0.16), transparent 55%),
-                  var(--bg);
-    }
-    .wrap {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 40px 18px 60px;
-    }
-    header {
-      display: grid;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-    .kicker {
-      font-size: 13px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-    h1 {
-      margin: 0;
-      font-size: clamp(28px, 4vw, 44px);
-      line-height: 1.05;
-    }
-    .subtitle {
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.5;
-      max-width: 70ch;
-    }
-    .controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 18px 0 26px;
-      align-items: center;
-    }
-    .pill {
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.03);
-      color: var(--text);
-      border-radius: 999px;
-      padding: 8px 12px;
-      font-size: 14px;
-      cursor: pointer;
-      user-select: none;
-    }
-    .pill:hover { border-color: rgba(125,211,252,0.55); }
-    input[type="search"]{
-      flex: 1 1 240px;
-      min-width: 220px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 10px 14px;
-      background: rgba(255,255,255,0.03);
-      color: var(--text);
-      outline: none;
-    }
-    input[type="search"]::placeholder{ color: rgba(255,255,255,0.45); }
-    @media (prefers-color-scheme: light) {
-      input[type="search"]::placeholder{ color: rgba(0,0,0,0.4); }
     }
 
-    .grid {
-      display: grid;
-      gap: 14px;
+    .wrap {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 50px 20px 70px;
     }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: clamp(28px, 4vw, 42px);
+    }
+
+    .subtitle {
+      color: var(--muted);
+      margin-bottom: 35px;
+      line-height: 1.6;
+      max-width: 70ch;
+    }
+
     .card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
+      padding: 18px 20px;
+      margin-bottom: 18px;
       box-shadow: var(--shadow);
-      padding: 16px 16px 14px;
     }
+
     .card h3 {
-      margin: 0 0 6px;
-      font-size: 18px;
-      line-height: 1.25;
+      margin: 0 0 8px;
+      font-size: 19px;
     }
+
     .meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px 10px;
+      font-size: 14px;
       color: var(--muted);
-      font-size: 13px;
       margin-bottom: 10px;
     }
+
     .tag {
+      display: inline-block;
       border: 1px solid var(--border);
       border-radius: 999px;
       padding: 3px 10px;
       font-size: 12px;
+      margin-right: 6px;
+      margin-top: 4px;
       color: var(--muted);
-      background: rgba(255,255,255,0.02);
     }
+
     .links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 8px 0 12px;
+      margin-top: 10px;
     }
-    a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-    a:hover { text-decoration: underline; }
+
     .btn {
-      border: 1px solid rgba(125,211,252,0.45);
-      border-radius: 10px;
-      padding: 7px 10px;
+      display: inline-block;
+      border: 1px solid rgba(125,211,252,0.5);
+      border-radius: 8px;
+      padding: 6px 12px;
       font-size: 13px;
+      text-decoration: none;
       color: var(--accent);
       background: rgba(125,211,252,0.08);
-      cursor: pointer;
+      margin-right: 8px;
     }
-    .btn:hover { background: rgba(125,211,252,0.12); }
 
-    details {
-      border-top: 1px dashed var(--border);
-      margin-top: 10px;
-      padding-top: 10px;
+    .btn:hover {
+      background: rgba(125,211,252,0.14);
     }
-    summary {
-      cursor: pointer;
-      color: var(--muted);
-      font-size: 13px;
-      user-select: none;
-    }
-    pre {
-      margin: 10px 0 0;
-      padding: 12px;
-      border-radius: 12px;
-      overflow: auto;
-      background: rgba(0,0,0,0.18);
-      border: 1px solid var(--border);
-      font-family: var(--mono);
-      font-size: 12.5px;
-      line-height: 1.45;
-      color: rgba(255,255,255,0.90);
-      white-space: pre;
-    }
-    @media (prefers-color-scheme: light) {
-      pre {
-        background: rgba(0,0,0,0.04);
-        color: rgba(0,0,0,0.82);
-      }
-    }
+
     footer {
-      margin-top: 24px;
+      margin-top: 35px;
       color: var(--muted);
       font-size: 13px;
-      line-height: 1.5;
     }
-    .hidden { display:none !important; }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <header>
-      <div class="kicker">Privacy in Machine Learning</div>
-      <h1>Reading list (MIAs, FL, Gradient Inversion, DP)</h1>
-      <div class="subtitle">
-        A curated set of papers that match the lecture flow:
-        <b>membership inference</b> → <b>federated learning</b> → <b>gradient inversion</b> → <b>differential privacy / DP-SGD</b>.
+
+    <h1>Privacy in Machine Learning</h1>
+    <div class="subtitle">
+      Curated readings matching the lecture flow:
+      Membership Inference → Gradient Inversion → Federated Learning → Differential Privacy.
+    </div>
+
+    <!-- Shokri -->
+    <div class="card">
+      <h3>Membership Inference Attacks against Machine Learning Models</h3>
+      <div class="meta">
+        Reza Shokri, Marco Stronati, Congzheng Song, Vitaly Shmatikov • IEEE S&P 2017
       </div>
-
-      <div class="controls">
-        <input id="q" type="search" placeholder="Search by title / authors / tags (e.g., 'DP-SGD', 'inversion', 'Shokri')" />
-        <button class="pill" id="expandAll">Expand BibTeX</button>
-        <button class="pill" id="collapseAll">Collapse BibTeX</button>
+      <span class="tag">MIA</span>
+      <span class="tag">Black-box attacks</span>
+      <div class="links">
+        <a class="btn" href="https://www.cs.cornell.edu/~shmat/shmat_oak17.pdf" target="_blank">PDF</a>
       </div>
-    </header>
+    </div>
 
-    <section class="grid" id="papers">
+    <!-- DLG -->
+    <div class="card">
+      <h3>Deep Leakage from Gradients</h3>
+      <div class="meta">
+        Ligeng Zhu, Zhijian Liu, Song Han • NeurIPS 2019
+      </div>
+      <span class="tag">Gradient Inversion</span>
+      <span class="tag">Reconstruction</span>
+      <div class="links">
+        <a class="btn" href="https://proceedings.neurips.cc/paper/9617-deep-leakage-from-gradients.pdf" target="_blank">PDF</a>
+      </div>
+    </div>
 
-      <!-- 1) Shokri MIA -->
-      <article class="card" data-keywords="membership inference mia shokri shmatikov black-box confidence overfitting ieee sp 2017">
-        <h3>Membership Inference Attacks against Machine Learning Models</h3>
-        <div class="meta">
-          <span>Reza Shokri, Marco Stronati, Congzheng Song, Vitaly Shmatikov</span>
-          <span>• IEEE S&amp;P 2017</span>
-          <span class="tag">MIA</span>
-          <span class="tag">Black-box</span>
-        </div>
-        <div class="links">
-          <a class="btn" href="https://www.cs.cornell.edu/~shmat/shmat_oak17.pdf" target="_blank" rel="noopener">PDF</a>
-          <a class="btn" href="https://arxiv.org/abs/1610.05820" target="_blank" rel="noopener">arXiv</a>
-        </div>
-        <div class="subtitle">
-          The classic paper: shadow models + attack classifier, showing membership leakage from confidence vectors; discusses mitigations.
-        </div>
-        <details>
-          <summary>BibTeX</summary>
-<pre>@inproceedings{shokri2017mia,
-  title={Membership Inference Attacks against Machine Learning Models},
-  author={Shokri, Reza and Stronati, Marco and Song, Congzheng and Shmatikov, Vitaly},
-  booktitle={IEEE Symposium on Security and Privacy (S\&P)},
-  year={2017}
-}</pre>
-        </details>
-      </article>
+    <!-- Geiping -->
+    <div class="card">
+      <h3>Inverting Gradients — How easy is it to break privacy in federated learning?</h3>
+      <div class="meta">
+        Jonas Geiping, Hartmut Bauermeister, Hannah Dröge, Michael Moeller • NeurIPS 2020
+      </div>
+      <span class="tag">Federated Learning</span>
+      <span class="tag">Gradient Inversion</span>
+      <div class="links">
+        <a class="btn" href="https://papers.neurips.cc/paper_files/paper/2020/file/c4ede56bbd98819ae6112b20ac6bf145-Paper.pdf" target="_blank">PDF</a>
+      </div>
+    </div>
 
-      <!-- 2) DLG -->
-      <article class="card" data-keywords="gradient inversion dlg zhu liu han neurips 2019 reconstruction">
-        <h3>Deep Leakage from Gradients</h3>
-        <div class="meta">
-          <span>Ligeng Zhu, Zhijian Liu, Song Han</span>
-          <span>• NeurIPS 2019</span>
-          <span class="tag">Gradient inversion</span>
-          <span class="tag">Reconstruction</span>
-        </div>
-        <div class="links">
-          <a class="btn" href="https://proceedings.neurips.cc/paper/9617-deep-leakage-from-gradients.pdf" target="_blank" rel="noopener">PDF</a>
-          <a class="btn" href="https://arxiv.org/abs/1906.08935" target="_blank" rel="noopener">arXiv</a>
-        </div>
-        <div class="subtitle">
-          Shows how shared gradients can be matched by optimizing dummy inputs/labels, recovering training examples (images/text).
-        </div>
-        <details>
-          <summary>BibTeX</summary>
-<pre>@inproceedings{zhu2019dlg,
-  title={Deep Leakage from Gradients},
-  author={Zhu, Ligeng and Liu, Zhijian and Han, Song},
-  booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
-  year={2019}
-}</pre>
-        </details>
-      </article>
+    <!-- Abadi -->
+    <div class="card">
+      <h3>Deep Learning with Differential Privacy</h3>
+      <div class="meta">
+        Martín Abadi et al. • CCS 2016
+      </div>
+      <span class="tag">Differential Privacy</span>
+      <span class="tag">DP-SGD</span>
+      <div class="links">
+        <a class="btn" href="https://arxiv.org/pdf/1607.00133" target="_blank">PDF</a>
+      </div>
+    </div>
 
-      <!-- 3) Geiping Inverting Gradients -->
-      <article class="card" data-keywords="inverting gradients geiping federated learning neurips 2020 privacy break reconstruction">
-        <h3>Inverting Gradients — How easy is it to break privacy in federated learning?</h3>
-        <div class="meta">
-          <span>Jonas Geiping, Hartmut Bauermeister, Hannah Dröge, Michael Moeller</span>
-          <span>• NeurIPS 2020</span>
-          <span class="tag">Federated Learning</span>
-          <span class="tag">Gradient inversion</span>
-        </div>
-        <div class="links">
-          <a class="btn" href="https://papers.neurips.cc/paper_files/paper/2020/file/c4ede56bbd98819ae6112b20ac6bf145-Paper.pdf" target="_blank" rel="noopener">PDF</a>
-          <a class="btn" href="https://arxiv.org/abs/2003.14053" target="_blank" rel="noopener">arXiv</a>
-          <a class="btn" href="https://github.com/JonasGeiping/invertinggradients" target="_blank" rel="noopener">Code</a>
-        </div>
-        <div class="subtitle">
-          Stronger, more practical gradient inversion; analyzes when reconstruction is easy/hard in realistic FL settings.
-        </div>
-        <details>
-          <summary>BibTeX</summary>
-<pre>@inproceedings{geiping2020inverting,
-  title={Inverting Gradients -- How easy is it to break privacy in federated learning?},
-  author={Geiping, Jonas and Bauermeister, Hartmut and Dr{\"o}ge, Hannah and Moeller, Michael},
-  booktitle={Advances in Neural Information Processing Systems (NeurIPS)},
-  year={2020}
-}</pre>
-        </details>
-      </article>
-
-      <!-- 4) Abadi DP-SGD -->
-      <article class="card" data-keywords="differential privacy dp-sgd abadi moments accountant ccs 2016 deep learning">
-        <h3>Deep Learning with Differential Privacy</h3>
-        <div class="meta">
-          <span>Martín Abadi et al.</span>
-          <span>• CCS 2016</span>
-          <span class="tag">Differential Privacy</span>
-          <span class="tag">DP-SGD</span>
-        </div>
-        <div class="links">
-          <a class="btn" href="https://arxiv.org/pdf/1607.00133" target="_blank" rel="noopener">PDF</a>
-          <a class="btn" href="https://arxiv.org/abs/1607.00133" target="_blank" rel="noopener">arXiv</a>
-          <a class="btn" href="https://dl.acm.org/doi/10.1145/2976749.2978318" target="_blank" rel="noopener">ACM DOI</a>
-        </div>
-        <div class="subtitle">
-          Introduces DP-SGD and the Moments Accountant analysis; the “classic” DP deep learning reference.
-        </div>
-        <details>
-          <summary>BibTeX</summary>
-<pre>@inproceedings{abadi2016dpdl,
-  title={Deep Learning with Differential Privacy},
-  author={Abadi, Martín and Chu, Andy and Goodfellow, Ian and McMahan, H. Brendan and Mironov, Ilya and Talwar, Kunal and Zhang, Li},
-  booktitle={ACM Conference on Computer and Communications Security (CCS)},
-  year={2016}
-}</pre>
-        </details>
-      </article>
-
-      <!-- 5) PATE -->
-      <article class="card" data-keywords="pate papernot private aggregation teacher ensembles student dp 2018">
-        <h3>Scalable Private Learning with PATE</h3>
-        <div class="meta">
-          <span>Nicolas Papernot, Shuang Song, Ilya Mironov, Ananth Raghunathan, Kunal Talwar, Úlfar Erlingsson</span>
-          <span>• 2018</span>
-          <span class="tag">Differential Privacy</span>
-          <span class="tag">Knowledge transfer</span>
-        </div>
-        <div class="links">
-          <a class="btn" href="https://research.google.com/pubs/archive/0e08bda44d22e076d15edc45afcb2e1a7a231a84.pdf" target="_blank" rel="noopener">PDF</a>
-          <a class="btn" href="https://arxiv.org/abs/1802.08908" target="_blank" rel="noopener">arXiv</a>
-        </div>
-        <div class="subtitle">
-          DP via noisy teacher voting + student training (knowledge distillation). A very different privacy mechanism than DP-SGD.
-        </div>
-        <details>
-          <summary>BibTeX</summary>
-<pre>@article{papernot2018pate,
-  title={Scalable Private Learning with {PATE}},
-  author={Papernot, Nicolas and Song, Shuang and Mironov, Ilya and Raghunathan, Ananth and Talwar, Kunal and Erlingsson, {\'U}lfar},
-  journal={arXiv preprint arXiv:1802.08908},
-  year={2018}
-}</pre>
-        </details>
-      </article>
-
-      <!-- 6) SoK MIA limitations -->
-      <article class="card" data-keywords="sok membership inference harder than previously thought dionysiou athanasopoulos pets 2023 limitations evaluation">
-        <h3>SoK: Membership Inference is Harder Than Previously Thought</h3>
-        <div class="meta">
-          <span>Antreas Dionysiou, Elias Athanasopoulos</span>
-          <span>• PETS 2023</span>
-          <span class="tag">MIA</span>
-          <span class="tag">SoK / evaluation</span>
-        </div>
-        <div class="links">
-          <a class="btn" href="https://adionysiou.github.io/papers/pets23b.pdf" target="_blank" rel="noopener">PDF</a>
-        </div>
-        <div class="subtitle">
-          A useful “reality check” paper: when MIAs succeed/fail, what assumptions they rely on, and evaluation pitfalls.
-        </div>
-        <details>
-          <summary>BibTeX</summary>
-<pre>@article{dionysiou2023sokmia,
-  title={{SoK}: Membership Inference is Harder Than Previously Thought},
-  author={Dionysiou, Antreas and Athanasopoulos, Elias},
-  journal={Proceedings on Privacy Enhancing Technologies (PETS)},
-  year={2023}
-}</pre>
-        </details>
-      </article>
-
-    </section>
+    <!-- SoK -->
+    <div class="card">
+      <h3>SoK: Membership Inference is Harder Than Previously Thought</h3>
+      <div class="meta">
+        Antreas Dionysiou, Elias Athanasopoulos • PETS 2023
+      </div>
+      <span class="tag">MIA</span>
+      <span class="tag">Evaluation</span>
+      <div class="links">
+        <a class="btn" href="https://adionysiou.github.io/papers/pets23b.pdf" target="_blank">PDF</a>
+      </div>
+    </div>
 
     <footer>
-      <div>
-        Tip: Put this page behind a short URL (e.g., <span style="font-family:var(--mono)">/privacy-ml</span>) so your QR code stays clean.
-        If you want, add a small “Try the code” section linking to your repo / notebook.
-      </div>
+      Add this page to a short URL (e.g., /privacy-ml) for a clean QR code.
     </footer>
+
   </div>
-
-  <script>
-    const q = document.getElementById('q');
-    const cards = Array.from(document.querySelectorAll('.card'));
-    const expandAll = document.getElementById('expandAll');
-    const collapseAll = document.getElementById('collapseAll');
-
-    function applyFilter() {
-      const term = (q.value || '').toLowerCase().trim();
-      for (const c of cards) {
-        const hay = (c.innerText + " " + (c.dataset.keywords || '')).toLowerCase();
-        c.classList.toggle('hidden', term.length > 0 && !hay.includes(term));
-      }
-    }
-    q.addEventListener('input', applyFilter);
-
-    expandAll.addEventListener('click', () => {
-      document.querySelectorAll('details').forEach(d => d.open = true);
-    });
-    collapseAll.addEventListener('click', () => {
-      document.querySelectorAll('details').forEach(d => d.open = false);
-    });
-  </script>
 </body>
 </html>
